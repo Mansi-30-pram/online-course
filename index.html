@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Online Course Platform</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body, h1, p, label {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #f0f4f8, #d9e4f5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 500px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    button {
+      padding: 12px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .primary {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .primary:hover {
+      background-color: #45a049;
+    }
+
+    .secondary {
+      background-color: #2196F3;
+      color: white;
+      margin-left: 10px;
+    }
+
+    .secondary:hover {
+      background-color: #1976D2;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    .success {
+      margin-top: 20px;
+      color: green;
+      font-weight: bold;
+    }
+
+    #registration-section,
+    #welcome-section {
+      display: none;
+      text-align: left;
+    }
+
+    #home-section, #welcome-section {
+      text-align: center;
+    }
+
+    .back-btn {
+      margin-top: 20px;
+      background-color: #888;
+      color: white;
+    }
+
+    .back-btn:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Home Section -->
+    <div id="home-section">
+      <h1>Welcome to Online Course Platform</h1>
+      <p>Learn from anywhere. Teach from anywhere.</p>
+      <button class="primary" onclick="showRegistration()">Register</button>
+      <button class="secondary" onclick="alert('Login feature coming soon!')">Login</button>
+    </div>
+
+    <!-- Registration Section -->
+    <div id="registration-section">
+      <h1>Register</h1>
+      <form id="registrationForm">
+        <input type="text" id="name" placeholder="Full Name" required />
+        <input type="email" id="email" placeholder="Email" required />
+        <input type="password" id="password" placeholder="Password" required />
+        <select id="role" required>
+          <option value="">Select Role</option>
+          <option value="student">Student</option>
+          <option value="instructor">Instructor</option>
+        </select>
+        <button type="submit" class="primary">Submit Registration</button>
+      </form>
+      <button class="back-btn" onclick="goBack()">Back to Home</button>
+    </div>
+
+    <!-- Welcome Section -->
+    <div id="welcome-section">
+      <h1 id="welcomeMessage"></h1>
+      <p>Thank you for registering at Online Course Platform.</p>
+      <button class="back-btn" onclick="logout()">Logout</button>
+    </div>
+  </div>
+
+  <script>
+    function showRegistration() {
+      document.getElementById('home-section').style.display = 'none';
+      document.getElementById('registration-section').style.display = 'block';
+    }
+
+    function goBack() {
+      document.getElementById('registration-section').style.display = 'none';
+      document.getElementById('home-section').style.display = 'block';
+    }
+
+    function logout() {
+      // Reset all and go back to home
+      document.getElementById('welcome-section').style.display = 'none';
+      document.getElementById('home-section').style.display = 'block';
+    }
+
+    document.getElementById('registrationForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Get form values
+      const name = document.getElementById('name').value.trim();
+      const role = document.getElementById('role').value;
+
+      // Create personalized welcome message
+      const welcomeMessage = `Welcome, ${name}! You have successfully registered as a ${role}.`;
+
+      // Show welcome section
+      document.getElementById('registration-section').style.display = 'none';
+      const welcomeSection = document.getElementById('welcome-section');
+      welcomeSection.style.display = 'block';
+
+      // Insert welcome message
+      document.getElementById('welcomeMessage').textContent = welcomeMessage;
+
+      // Reset form
+      this.reset();
+    });
+  </script>
+
+</body>
+</html>
